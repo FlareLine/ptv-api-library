@@ -12,7 +12,7 @@ Developers wishing for permissions outside the scope of the license may privatel
 ### Documentation
 Documentation for this library is still in development and will be improved concurrently.
 
-The internal C# code is heavily annotated inline with documentation blocks in order to make it easier to read and understand.
+The internal C# code is annotated inline with documentation blocks in order to make it easier to read and understand.
 ---
 ### Download
 The latest version of the library can be found ~~[here](https://www.github.com/flareline/ptv-api-wrapper)~~ (yet to implement).
