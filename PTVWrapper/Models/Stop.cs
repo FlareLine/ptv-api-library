@@ -11,7 +11,8 @@ namespace PTVWrapper.Models
         public string Description { get; set; }
         public RouteType RouteType { get; set; }
         public Location Location { get; set; }
-        public KeyValuePair<string, bool> Features { get; set; }
+        public Dictionary<string, bool> Amentities { get; set; }
+        public Dictionary<string, bool> Accessibility { get; set; }
 
         /// <summary>
         /// Constructor for creating a new <see cref="Stop"/> object
@@ -22,8 +23,9 @@ namespace PTVWrapper.Models
         /// <param name="ds">Description</param>
         /// <param name="rt">Stop <see cref="Models.RouteType"/></param>
         /// <param name="lc">Location as a <see cref="Models.Location"/></param>
-        /// <param name="ft">A <see cref="KeyValuePair{String, Boolean}"/> or <see langword="null"/> if not available</param>
-        public Stop(int id, string nm, string ty, string ds, RouteType rt, Location lc, KeyValuePair<string, bool> ft)
+        /// <param name="am">A <see cref="Dictionary{String, Boolean}"/> or <see langword="null"/> if not available</param>
+        /// <param name="ac">A <see cref="Dictionary{String, Boolean}"/> or <see langword="null"/> if not available</param>
+        public Stop(int id, string nm, string ty, string ds, RouteType rt, Location lc, Dictionary<string, bool> am, Dictionary<string, bool> ac)
         {
             Id = id;
             Name = nm;
@@ -31,7 +33,8 @@ namespace PTVWrapper.Models
             Description = ds;
             RouteType = rt;
             Location = lc;
-            Features = ft;
+            Amentities = am;
+            Accessibility = ac;
         }
     }
 }
