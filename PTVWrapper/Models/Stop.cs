@@ -6,11 +6,14 @@ namespace PTVWrapper.Models
     public class Stop
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
+
         public RouteType RouteType { get; set; }
         public Location Location { get; set; }
+
         public Dictionary<string, bool> Amentities { get; set; }
         public Dictionary<string, bool> Accessibility { get; set; }
 

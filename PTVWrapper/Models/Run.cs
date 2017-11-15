@@ -6,8 +6,10 @@ namespace PTVWrapper.Models
     public class Run
     {
         public int Id { get; set; }
+
         public Route Route { get; set; }
         public Stop Final { get; set; }
+
         public string Status { get; set; }
 
         /// <summary>

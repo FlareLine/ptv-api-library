@@ -7,6 +7,7 @@ namespace PTVWrapper.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         public Route Route { get; set; }
 
         /// <summary>

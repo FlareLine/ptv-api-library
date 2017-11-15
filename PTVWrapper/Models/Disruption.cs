@@ -6,15 +6,18 @@ namespace PTVWrapper.Models
     public class Disruption
     {
         public int Id { get; set; }
+
         public string Title { get; set; }
         public string Url { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
         public string Type { get; set; }
+
         public DateTime Published { get; set; }
         public DateTime Updated { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
+
         public List<Route> Routes { get; set; }
 
         /// <summary>
