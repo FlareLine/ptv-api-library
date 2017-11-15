@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Models\Departure.cs" />
     <Compile Include="Models\Disruption.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\RouteType.cs" />
     <Compile Include="Models\Stop.cs" />
     <Compile Include="Models\Direction.cs" />
