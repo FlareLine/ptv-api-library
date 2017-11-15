@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PTVWrapper
+namespace PTVWrapper.Models
 {
-    public class Class1
+    public class Direction
     {
     }
 }
