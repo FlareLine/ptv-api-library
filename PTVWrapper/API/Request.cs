@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+
 using PTVWrapper.Models;
+
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +14,8 @@ namespace PTVWrapper.Request
     {
         // Developer id and key required for PTV API requests
         // Replace the empty strings with your own, or use a method to return some valid credentials
-        static string DEV_ID = "";
-        static string DEV_KEY = "";
+        public static string DEV_ID = "";
+        public static string DEV_KEY = "";
 
         // Base url for the PTV API
         static string API_URL = "http://timetableapi.ptv.vic.gov.au";
