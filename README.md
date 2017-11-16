@@ -16,4 +16,4 @@ The internal C# code is annotated inline with documentation blocks in order to m
 
 ---
 ### Download
-The latest version of the library can be found ~~[here](https://www.github.com/flareline/ptv-api-wrapper)~~ (yet to implement).
+The latest release of the library can be found [here](https://github.com/FlareLine/ptv-api-library/releases/latest) as a DLL file.
