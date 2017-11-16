@@ -28,7 +28,7 @@ namespace PTVWrapper.Request
         public static string GenerateSignature(string re)
         {
             // Insert the base string for API calls and format the string to contain the developer id
-            string url = String.Format("/v3/{0}{1}devid={2}", $"/v3/{re}", re.Contains("?") ? "&" : "?", DEV_ID);
+            string url = String.Format("/v3/{0}{1}devid={2}", $"{re}", re.Contains("?") ? "&" : "?", DEV_ID);
 
             // Create a new encoding object for string byte encoding
             ASCIIEncoding encoding = new ASCIIEncoding();
