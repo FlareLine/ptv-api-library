@@ -1,6 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using PTVWrapper.Models;
+using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace PTVWrapper.Request
 {
@@ -28,7 +34,7 @@ namespace PTVWrapper.Request
             ASCIIEncoding encoding = new ASCIIEncoding();
 
             //Encode both the developer key and the request url
-            byte[] kb = encoding.GetBytes(DEV_ID);
+            byte[] kb = encoding.GetBytes(DEV_KEY);
             byte[] ub = encoding.GetBytes(url);
 
             // Generate the url token hash for authenticating the API request
@@ -41,13 +47,48 @@ namespace PTVWrapper.Request
             // Output the string from the StringBuilder
             url = String.Format("{0}{1}&signature={2}", API_URL, url, sb.ToString());
 
-            // Write the url to the console if debugging
-#if DEBUG
-            Debug.Write(url);
-#endif
-
             // Return the API string
             return url;
+        }
+
+        /// <summary>
+        /// Request data from the API using a pre-encoded signature string
+        /// </summary>
+        /// <param name="re"></param>
+        /// <returns></returns>
+        public static async Task<Payload> RequestEncFromAPI(string re)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    return JsonConvert.DeserializeObject<Payload>(await client.GetStringAsync(re), new JsonSerializerSettings
+                    {
+                        MissingMemberHandling = MissingMemberHandling.Ignore,
+                        NullValueHandling = NullValueHandling.Ignore,
+                        Error = HandleDeserializationError
+                    });
+                }
+            } catch (HttpRequestException e)
+            {
+                // Couldn't retreive data from the API, either the API or your internet connection is not responding
+                Debug.Write(e.StackTrace);
+
+                // Return a blank Payload object
+                return await Task.FromResult<Payload>(null);
+            }
+        }
+
+        public static async Task<Payload> RequestUnencFromAPI(string re) => await RequestEncFromAPI(GenerateSignature(re));
+
+        /// <summary>
+        /// Handle any errors regarding receiving a null objects from the API
+        /// This stops the program trying to put the null object into the results
+        /// </summary>
+        static void HandleDeserializationError(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs errorArgs)
+        {
+            var currentError = errorArgs.ErrorContext.Error.Message;
+            errorArgs.ErrorContext.Handled = true;
         }
     }
 }
