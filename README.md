@@ -4,8 +4,8 @@ A lightweight C# wrapper for the Public Transport Victoria API, removing the nee
 
 ---
 ### Licensing
-![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/2.0/88x31.png)  
-This API is licensed under a [Creative Commons Attribution-NonCommercial-NoDerivs 2.0 Generic License](http://creativecommons.org/licenses/by-nc-nd/2.0/), which allows for private derivatives and non-commercial use.
+![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)  
+This API is licensed under a [Creative Commons Attribution-NonCommercial-NoDerivs 4.0 Generic License](http://creativecommons.org/licenses/by-nc-nd/4.0/), which allows for private derivatives and non-commercial use.
 Developers wishing for permissions outside the scope of the license may privately contact me.
 
 ---
