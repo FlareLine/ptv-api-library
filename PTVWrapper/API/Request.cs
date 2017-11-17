@@ -12,29 +12,27 @@ namespace PTVWrapper.Request
 {
     public class Request
     {
-        // Developer id and key required for PTV API requests
-        // Replace the empty strings with your own, or use a method to return some valid credentials
-        public static string DEV_ID = "";
-        public static string DEV_KEY = "";
 
         // Base url for the PTV API
         static string API_URL = "http://timetableapi.ptv.vic.gov.au";
 
         /// <summary>
-        /// Generate a URI signature for making API requests
+        /// Generate a URI signature for making API requests - a developer id and key is required
         /// </summary>
         /// <param name="re">Request to be made</param>
+        /// <param name="id">Developer id</param>
+        /// <param name="ky">Developer key</param>
         /// <returns>URL signature for <paramref name="re"/></returns>
-        public static string GenerateSignature(string re)
+        public static string GenerateSignature(string re, string id, string ky)
         {
             // Insert the base string for API calls and format the string to contain the developer id
-            string url = String.Format("/v3/{0}{1}devid={2}", $"{re}", re.Contains("?") ? "&" : "?", DEV_ID);
+            string url = String.Format("/v3/{0}{1}devid={2}", $"{re}", re.Contains("?") ? "&" : "?", id);
 
             // Create a new encoding object for string byte encoding
             ASCIIEncoding encoding = new ASCIIEncoding();
 
             //Encode both the developer key and the request url
-            byte[] kb = encoding.GetBytes(DEV_KEY);
+            byte[] kb = encoding.GetBytes(ky);
             byte[] ub = encoding.GetBytes(url);
 
             // Generate the url token hash for authenticating the API request
@@ -54,8 +52,8 @@ namespace PTVWrapper.Request
         /// <summary>
         /// Request data from the API using a pre-encoded signature string
         /// </summary>
-        /// <param name="re"></param>
-        /// <returns></returns>
+        /// <param name="re">The request signature</param>
+        /// <returns>Some data from the API based on <paramref name="re"/></returns>
         public static async Task<Payload> RequestEncFromAPI(string re)
         {
             try
@@ -79,11 +77,17 @@ namespace PTVWrapper.Request
             }
         }
 
-        public static async Task<Payload> RequestUnencFromAPI(string re) => await RequestEncFromAPI(GenerateSignature(re));
+        /// <summary>
+        /// Override method for requesting using unencoded URIs - a developer id and key is required
+        /// </summary>
+        /// <param name="re">Unencoded request URI</param>
+        /// <param name="id">Developer id</param>
+        /// <param name="ky">Developer key</param>
+        /// <returns>Some data from the API based on <paramref name="re"/></returns>
+        public static async Task<Payload> RequestUnencFromAPI(string re, string id, string ky) => await RequestEncFromAPI(GenerateSignature(re, id, ky));
 
         /// <summary>
-        /// Handle any errors regarding receiving a null objects from the API
-        /// This stops the program trying to put the null object into the results
+        /// Handle any errors regarding receiving a null objects from the API - this stops the program trying to put the null object into the results
         /// </summary>
         static void HandleDeserializationError(object sender, Newtonsoft.Json.Serialization.ErrorEventArgs errorArgs)
         {
