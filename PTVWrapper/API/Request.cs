@@ -4,6 +4,7 @@ using PTVWrapper.Models;
 
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,5 +95,14 @@ namespace PTVWrapper.Request
             var currentError = errorArgs.ErrorContext.Error.Message;
             errorArgs.ErrorContext.Handled = true;
         }
+
+        /// <summary>
+        /// Method to request a search using search terms
+        /// </summary>
+        /// <param name="st">Search terms</param>
+        /// <param name="id">Developer id</param>
+        /// <param name="ky">Developer key</param>
+        /// <returns></returns>
+        public static async Task<Payload> RequestSearch(string st, string id, string ky) => await RequestUnencFromAPI($"search/{WebUtility.UrlEncode(st)}", id, ky);
     }
 }
